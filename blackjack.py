@@ -147,6 +147,8 @@ if dealers_value > 21:
     print("Player wins!")
 elif dealers_value < players_value:
         print("Player wins!")
+elif player_hand > 21:
+        print("Dealer wins!")
 else:
     print("Dealer wins!")
 
