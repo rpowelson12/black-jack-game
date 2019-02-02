@@ -122,6 +122,11 @@ print("This is the players cards value: " + str(players_value))
 
 player_action = ""
 while players_value < 21 and player_action != "stay":
+    if dealers_value == 21:
+        print("This is the dealers hand: " + str(dealer_hand))
+        print("This is the dealers value: " + str(dealers_value))
+        print("Dealer wins!")
+        break
     player_action = input("Would you like to hit or stay? ").lower()
     if player_action == "hit":
         new_player_card = card_list.pop(1)
@@ -132,32 +137,34 @@ if players_value > 21:
     print("Player busted, dealer wins")
 
 
-while dealers_value < 17:
-    new_dealer_card = card_list.pop(1)
-    dealer_hand.append(new_dealer_card)
-    dealers_value = add_dealers_cards(dealers_value)
-    print("This is the dealers hand: " + str(dealer_hand))
-    print("This is the dealers valuer: " + str(dealers_value))
-if dealers_value > 21:
-    print("Dealer busted, player wins!")
+while players_value <= 21 and dealers_value <= 21:
+
+    if dealers_value > 17:
+        break
+
+    else:
+        if len(player_hand) == 2 and players_value == 21 and dealers_value != 21:
+            break
+        new_dealer_card = card_list.pop(1)
+        dealer_hand.append(new_dealer_card)
+        dealers_value = add_dealers_cards(dealers_value)
+        print("This is the dealers hand: " + str(dealer_hand))
+        print("This is the dealers value: " + str(dealers_value))
+        if dealers_value > 21:
+            print("Dealer busted, player wins!")
+            break
 
 
 # compare the hands
-if dealers_value > 21:
-    print("Player wins!")
-elif dealers_value < players_value:
+if players_value and dealers_value <= 21:
+    if players_value > 21:
+        print("This is the dealers hand: " + str(dealer_hand))
+    elif dealers_value > 21:
         print("Player wins!")
-elif player_hand > 21:
+    elif dealers_value < players_value:
+        print("Player wins!")
+    elif dealers_value == players_value:
+        print("It is a push")
+    elif dealers_value > players_value:
+        print("This is the dealers hand: " + str(dealer_hand))
         print("Dealer wins!")
-else:
-    print("Dealer wins!")
-
-
-
-
-
-
-
-
-
-
